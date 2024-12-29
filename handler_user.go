@@ -4,7 +4,7 @@ import (
     "fmt"
 )
 
-func handlerLogin (s *state, cmd command) error {
+func handlerLogin(s *state, cmd command) error {
     if len(cmd.Args) != 1 {
         return fmt.Errorf("usage: %s <name>", cmd.Name)
     }
@@ -15,6 +15,6 @@ func handlerLogin (s *state, cmd command) error {
         return fmt.Errorf("couldn't set current user: %w", err)
     }
 
-    fmt.Println("User switched successfully")
+    fmt.Printf("User switched to %s\n", name)
     return nil
 }
