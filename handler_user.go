@@ -9,6 +9,27 @@ import (
     "github.com/google/uuid"
 )
 
+func handlerGetUsers(s *state, cmd command) error {
+    // prints all users with a "(current)" next to the current user
+    users, err := s.db.GetUsers(context.Background())
+    if err != nil {
+        return fmt.Errorf("error getting users: %w", err)
+    }
+    if len(users) == 0 {
+        fmt.Println("No users found.")
+        return nil
+    }
+    fmt.Println("Users:")
+    for _, user := range users {
+        fmt.Printf(" * %v", user.Name)
+        if user.Name == s.cfg.CurrentUserName {
+            fmt.Print(" (current)")
+        }
+        fmt.Println()
+    }
+    return nil
+}
+
 func handlerRegister(s *state, cmd command) error {
     if len(cmd.Args) < 1 {
         return fmt.Errorf("usage: %v <name>", cmd.Name)
