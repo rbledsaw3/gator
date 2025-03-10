@@ -9,7 +9,6 @@ import (
     "github.com/google/uuid"
 )
 
-
 func handlerRegister(s *state, cmd command) error {
     if len(cmd.Args) < 1 {
         return fmt.Errorf("usage: %v <name>", cmd.Name)
