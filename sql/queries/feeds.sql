@@ -9,5 +9,10 @@ WHERE user_id = $1
 ORDER BY created_at DESC
 LIMIT 25;
 
+-- name: GetAllFeeds :many
+SELECT * FROM feeds
+ORDER BY created_at DESC
+LIMIT $1;
+
 -- name: DeleteAllFeeds :exec
 DELETE FROM feeds;
